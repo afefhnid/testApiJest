@@ -18,7 +18,7 @@ module.exports = () => {
           done: false,
         })
         .expect(201)
-        .end(function(err, res) {
+        .end(function(err) {
           done(err);
         });
     });

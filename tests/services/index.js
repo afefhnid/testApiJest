@@ -16,5 +16,5 @@ module.exports = () => {
   /**
    * API /users
    */
-  describe('API /services', require('./services.test.js'));
+  //describe('API /services');
 };

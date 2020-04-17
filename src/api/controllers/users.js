@@ -32,14 +32,30 @@ module.exports = {
   async create(req, res) {
     const reqBody = req.body;
     const user = await UserService.create(reqBody);
+
     res.send(200);
+
     return user;
   },
   async delete(req, res) {
-    console.log(req);
-    const id = req.params.id;
+    const { id } = req.params;
     const user = await UserService.delete(id);
+
     res.send(200);
+
     return user;
+  },
+  async getById(req, res) {
+    const { id } = req.params;
+    const user = await UserService.getById(id);
+
+    res.send(user);
+    // res.send(user);
+  },
+  async get(req, res) {
+    const user = await UserService.get();
+
+    // res.send(user);
+    res.send(user);
   },
 };
