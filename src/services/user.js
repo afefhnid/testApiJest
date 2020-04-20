@@ -26,13 +26,8 @@ const findBy = id => {
   const data = fs.readFileSync(`${__dirname}/users.json`, 'utf8');
   const dataNew = JSON.parse(data);
   const user = dataNew.find(item => item.id == id);
-  return user;
-  /*fs.readFile(`${__dirname}/users.json`, 'utf8', async function(err, data) {
-    const dataNew = await JSON.parse(data);
-    const user = await dataNew.find(item => item.id == id);
 
-    return user;
-  });*/
+  return user;
 };
 
 module.exports = {
@@ -74,6 +69,7 @@ module.exports = {
   async get() {
     const data = fs.readFileSync(`${__dirname}/users.json`, 'utf8');
     const dataNew = JSON.parse(data);
+
     return dataNew;
   },
   async getById(id) {

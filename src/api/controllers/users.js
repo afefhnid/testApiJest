@@ -33,8 +33,9 @@ module.exports = {
     const reqBody = req.body;
     const user = await UserService.create(reqBody);
 
-    res.send(200);
+    res.send(201);
 
+    //res.status(201).send(user);
     return user;
   },
   async delete(req, res) {
@@ -48,7 +49,7 @@ module.exports = {
   async getById(req, res) {
     const { id } = req.params;
     const user = await UserService.getById(id);
-
+    console.log(user);
     res.send(user);
     // res.send(user);
   },
@@ -56,6 +57,7 @@ module.exports = {
     const user = await UserService.get();
 
     // res.send(user);
+    res.status(200).send(user);
     res.send(user);
   },
 };
