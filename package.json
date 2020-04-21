@@ -11,7 +11,7 @@
     "seed": "sequelize db:seed:all",
     "lint": "eslint . && prettier --check \"**/*.{json,md,html,yaml,css}\"",
     "lint:fix": "eslint . --fix && prettier --write \"**/*.{json,md,html,yaml,css}\"",
-    "test": "jest",
+    "test": "jest ",
     "test:watch": "jest --watch"
   },
   "husky": {
@@ -78,6 +78,9 @@
     "node": ">=10.16"
   },
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ]
   }
 }

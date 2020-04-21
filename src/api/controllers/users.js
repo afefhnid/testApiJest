@@ -35,7 +35,7 @@ module.exports = {
 
     res.send(201);
 
-    //res.status(201).send(user);
+    // res.status(201).send(user);
     return user;
   },
   async delete(req, res) {
@@ -49,9 +49,8 @@ module.exports = {
   async getById(req, res) {
     const { id } = req.params;
     const user = await UserService.getById(id);
-    console.log(user);
+
     res.send(user);
-    // res.send(user);
   },
   async get(req, res) {
     const user = await UserService.get();

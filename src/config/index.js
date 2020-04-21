@@ -21,7 +21,7 @@ const config = convict({
     doc: 'Server port',
     format: 'port',
     env: 'PORT',
-    default: 8080,
+    default: 8083,
   },
   proxy: {
     doc: 'Server proxy',
