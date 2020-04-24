@@ -4,12 +4,11 @@ const { expect } = require('chai');
 const app = require('../../src');
 
 const api = supertest(app);
-const get = require('./users/get.user');
 
-module.exports = () => {
-  /**
+/**module.exports = () => {
+  
    * API /
-   */
+   
   describe('API /', () => {
     it('gets the test endpoint', async done => {
       get();
@@ -18,4 +17,4 @@ module.exports = () => {
   // eslint-disable-next-line global-require
   // describe('Get /api/login', require('/users/index.js'));
   // describe('Get /api/addUser', require('./add.user'));
-};
+};*/

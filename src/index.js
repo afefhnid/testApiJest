@@ -1,15 +1,14 @@
 const express = require('express');
 const expressErrorHandler = require('@kazaar/express-error-handler');
 const helmet = require('helmet');
-
 const bodyParser = require('body-parser');
+const fs = require('fs');
 
 const api = require('./api');
-const { host, port, env } = require('./config');
+const { host, env } = require('./config');
 const { sequelize } = require('./db/models');
 const logger = require('./config/logger');
 
-const fs = require('fs');
 const {
   // httpErrorHandler,
   handleServerError,
@@ -57,16 +56,20 @@ app.use(httpErrorHandler); */
 /**
  * Server start
  */
-app
-  .listen(port, host, () => {
-    logger.info(`App is running at ${host}:${port} in ${env} mode`);
+let port = process.env.PORT || process.argv[2] || 3000;
 
-    // Verify database connection
-    sequelize
-      .authenticate()
-      .then(() => logger.info(`Successfully connected to ${sequelize.config.database} database`))
-      .catch(handleSequelizeConnectionError);
-  })
-  .on('error', handleServerError);
+port = typeof port === 'number' ? port : 3000;
+if (!module.parent) {
+  app
+    .listen(port, host, () => {
+      logger.info(`App is running at ${host}:${port} in ${env} mode`);
 
+      // Verify database connection
+      sequelize
+        .authenticate()
+        .then(() => logger.info(`Successfully connected to ${sequelize.config.database} database`))
+        .catch(handleSequelizeConnectionError);
+    })
+    .on('error', handleServerError);
+}
 module.exports = app;

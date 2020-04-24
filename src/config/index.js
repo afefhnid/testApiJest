@@ -17,6 +17,7 @@ const config = convict({
     format: '*',
     default: '0.0.0.0',
   },
+
   port: {
     doc: 'Server port',
     format: 'port',
