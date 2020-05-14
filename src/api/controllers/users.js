@@ -1,4 +1,5 @@
 const UserService = require('../../services/user');
+const Auth = require('../../services/basic-auth');
 
 // const dataPath = './data/users.json';
 module.exports = {
@@ -21,6 +22,15 @@ module.exports = {
     res.status(201).send(user);
     // return user;
   },
+  async updateUser(req, res, next) {
+    const userDetails = req.body;
+    const { id } = req.params;
+    const user = await UserService.updateUser(id, userDetails);
+
+    res.status(200).send(user);
+    // return user;
+  },
+
   // eslint-disable-next-line no-unused-vars
   async getUser(req, res, next) {
     const { id } = req.params;
@@ -58,5 +68,10 @@ module.exports = {
     // res.send(user);
     res.status(200).send(user);
     res.send(user);
+  },
+  async auth(req, res) {
+    const user = await Auth.digestAuth();
+
+    user ? res.status(200) : res.status(401);
   },
 };

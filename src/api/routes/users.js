@@ -11,5 +11,6 @@ router.post('/create', usersController.create);
 router.delete('/:id', usersController.delete);
 router.get('/login', usersController.login);
 router.post('/add', usersController.addUser);
+router.put('/:id', usersController.updateUser);
 // router.get('/test', (req, res) => res.sendStatus(200));
 module.exports = router;

@@ -9,10 +9,11 @@
     "pretest": "cross-env NODE_ENV=test run-s migrate seed",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
-    "lint": "eslint . && prettier --check \"**/*.{json,md,html,yaml,css}\"",
+    "eslint": "eslint . && prettier --check \"**/*.{json,md,html,yaml,css}\"",
     "lint:fix": "eslint . --fix && prettier --write \"**/*.{json,md,html,yaml,css}\"",
     "test": "jest ",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "auth": "node ./src/services/basic-auth.js"
   },
   "husky": {
     "hooks": {

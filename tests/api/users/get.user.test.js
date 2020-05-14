@@ -7,7 +7,6 @@ const request = supertest(app);
 
 describe('Post Endpoints', () => {
   it('gets the test endpoint', async done => {
-    request(app);
     const response = await request.get('/api/users/');
 
     expect(response.statusCode).toEqual(200);
