@@ -28,7 +28,7 @@ const addJson = reqBody => {
 };
 const update = (id, reqBody) => {
   var id = id.match(/\d+/)[0];
-
+  let result = false;
   id = parseInt(id);
   if (id) {
     const data = fs.readFileSync(`${__dirname}/users.json`);
@@ -37,30 +37,13 @@ const update = (id, reqBody) => {
     usersArray.map((obj, i) => {
       if (obj.id === reqBody.id) {
         usersArray[i] = reqBody;
-        console.log(i);
+        result = true;
       }
     });
-    // console.log(usersArray);
+
     fs.writeFileSync(`${__dirname}/users.json`, JSON.stringify(usersArray, null, 2));
   }
-  /* fs.readFile(`${__dirname}/users.json`, 'utf8', function(_err, data) {
-    const usersArray = JSON.parse(data);
-
-    usersArray.sort((userA, userB) => userB.id - userA.id);
-    const dataNew = JSON.parse(data);
-    const reqs = reqBody;
-
-    reqs.id = usersArray[0].id + 1;
-    dataNew.push(reqs);
-    fs.writeFile(`${__dirname}/users.json`, JSON.stringify(dataNew), function(err) {
-      // eslint-disable-next-line no-console
-      if (err) console.log('error', err);
-
-      return true;
-    });
-  });
-
-  return true; */
+  return result;
 };
 
 const findBy = id => {

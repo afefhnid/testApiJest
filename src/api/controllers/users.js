@@ -27,7 +27,12 @@ module.exports = {
     const { id } = req.params;
     const user = await UserService.updateUser(id, userDetails);
 
-    res.status(200).send(user);
+    if (user === true) {
+      res.status(200).send(user);
+    } else {
+      res.status(401).send(user);
+    }
+
     // return user;
   },
 
