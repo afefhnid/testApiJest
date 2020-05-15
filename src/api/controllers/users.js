@@ -57,9 +57,11 @@ module.exports = {
     const { id } = req.params;
     const user = await UserService.delete(id);
 
-    res.send(200);
-
-    return user;
+    if (user === true) {
+      res.status(200).send(user);
+    } else {
+      res.status(404).send(user);
+    }
   },
   async getById(req, res) {
     const { id } = req.params;

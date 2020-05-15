@@ -2,8 +2,6 @@
 const { promisify } = require('util');
 const fs = require('fs');
 
-const readFileAsync = promisify(fs.readFile);
-
 const { User } = require('../db/models');
 
 const addJson = reqBody => {
@@ -29,6 +27,7 @@ const addJson = reqBody => {
 const update = (id, reqBody) => {
   var id = id.match(/\d+/)[0];
   let result = false;
+
   id = parseInt(id);
   if (id) {
     const data = fs.readFileSync(`${__dirname}/users.json`);
@@ -43,6 +42,7 @@ const update = (id, reqBody) => {
 
     fs.writeFileSync(`${__dirname}/users.json`, JSON.stringify(usersArray, null, 2));
   }
+
   return result;
 };
 
@@ -81,18 +81,21 @@ module.exports = {
     return update(id, reqBody);
   },
   async delete(id) {
+    let resDelete = false;
     var id = await id.match(/\d+/)[0];
 
     id = parseInt(id);
-    if (id) {
-      const data = fs.readFileSync(`${__dirname}/users.json`);
-      const obj = JSON.parse(data);
-      const json = obj.filter(user => {
-        return user.id !== id;
-      });
 
-      fs.writeFileSync(`${__dirname}/users.json`, JSON.stringify(json, null, 2));
+    const data = fs.readFileSync(`${__dirname}/users.json`);
+    const obj = JSON.parse(data);
+    const initLength = obj.length;
+    const json = obj.filter(user => user.id !== id);
+    const newLength = json.length;
+    fs.writeFileSync(`${__dirname}/users.json`, JSON.stringify(json, null, 2));
+    if (initLength - newLength === 1) {
+      resDelete = true;
     }
+    return resDelete;
   },
   async get() {
     const data = fs.readFileSync(`${__dirname}/users.json`, 'utf8');

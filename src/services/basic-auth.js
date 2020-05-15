@@ -5,7 +5,6 @@ module.exports = {
     const data = fs.readFileSync(`${__dirname}/users.json`);
     const usersArray = JSON.parse(data);
     let validite = false;
-    console.log(usersArray);
 
     usersArray.map(obj => {
       if (obj.email == authentication[0] && obj.password == authentication[1]) {
